@@ -28,6 +28,7 @@ func Init() *echo.Echo {
 
 	e.GET("api/shipment/get-all", controllers.FetchAllShipments)
 	e.POST("api/shipment/insert", controllers.AddShipment)
+	e.PUT("api/shipment/update-status/:shipment_number", controllers.UpdateShipmentStatus)
 
 	e.GET("api/generate-hash/:password", controllers.GenerateHashPassword)
 	// e.POST("api/login", controllers.ActionLogin)
