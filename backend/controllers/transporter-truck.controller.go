@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/labstack/echo/v4"
 	"hackathon-basic-backend/models"
 	"net/http"
@@ -10,6 +9,22 @@ import (
 
 func FetchAllTrucks(c echo.Context) error {
 	result, err := models.FetchAllTrucks()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{
+			"message": err.Error(),
+		})
+	}
+
+	return c.JSON(http.StatusOK, result)
+}
+
+func FetchByIdTruck(c echo.Context) error {
+	id := c.Param("id")
+	int_id, err := strconv.Atoi(id)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	result, err := models.FetchByIdTruck(int_id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{
 			"message": err.Error(),
@@ -48,6 +63,7 @@ func UpdateTruck(c echo.Context) error {
 	productionYear := c.FormValue("production_year")
 	status := c.FormValue("status")
 
+	result, err := models.Response{}, nil
 	if status == "Active" || status == "active" {
 		result, err = models.UpdateTruck(int_id, licenseNumber, truckType, plateType, productionYear, true)
 	} else {

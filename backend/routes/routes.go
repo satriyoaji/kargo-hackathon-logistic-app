@@ -15,6 +15,7 @@ func Init() *echo.Echo {
 	})
 
 	e.GET("api/transporter/get-all-trucks", controllers.FetchAllTrucks)
+	e.GET("api/transporter/get-truck/:id", controllers.FetchByIdTruck)
 	e.POST("api/transporter/store-truck", controllers.StoreTruck)
 	e.PUT("api/transporter/update-truck/:id", controllers.UpdateTruck)
 	e.DELETE("api/transporter/delete-truck/:id", controllers.DeleteTruck)

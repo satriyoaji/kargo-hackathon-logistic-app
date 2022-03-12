@@ -13,7 +13,7 @@ type Truck struct {
 	ProductionYear string `json:"production_year" validate:""`
 	STNK           string `json:"stnk" validate:""`
 	KIR            string `json:"kir" validate:""`
-	Status         bool   `json:"status" validate:"required"`
+	Status         bool   `json:"status" validate:"" gorm:"not null"`
 }
 
 func FetchAllTrucks() (Response, error) {
@@ -26,6 +26,24 @@ func FetchAllTrucks() (Response, error) {
 	res.Status = http.StatusOK
 	res.Message = "Success"
 	res.Data = trucks
+
+	return res, nil
+}
+
+func FetchByIdTruck(id int) (Response, error) {
+	var res Response
+
+	truck := Truck{}
+
+	if err := DB.Where("id = ?", id).First(&truck).Error; err != nil {
+		res.Status = http.StatusInternalServerError
+		res.Message = "the truck not found !"
+		return res, err
+	}
+
+	res.Status = http.StatusOK
+	res.Message = "Success"
+	res.Data = truck
 
 	return res, nil
 }
