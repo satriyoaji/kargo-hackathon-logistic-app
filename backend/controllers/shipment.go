@@ -46,3 +46,32 @@ func AddShipment(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, result)
 }
+
+func UpdateShipmentStatus(c echo.Context) error {
+	shipmentNumber := c.Param("shipment_number")
+
+	licenseNumber := c.FormValue("license_number")
+	driverName := c.FormValue("driver_name")
+	origin := c.FormValue("origin")
+	destination := c.FormValue("destination")
+	loadingDate := c.FormValue("loading_date")
+	status := c.FormValue("status")
+	action := c.FormValue("action")
+
+	result, err := models.UpdateShipmentStatus(
+		shipmentNumber,
+		licenseNumber,
+		driverName,
+		origin,
+		destination,
+		loadingDate,
+		status,
+		action,
+	)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, result)
+}
