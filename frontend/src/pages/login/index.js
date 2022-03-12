@@ -1,15 +1,9 @@
-import { useState, useCallback } from 'react'
-import { Button, Select, Space, Typography } from 'antd'
+import { Space, Typography } from 'antd'
 
 // Routing imports
 import { Link } from 'react-router-dom'
 
 import './style.scss'
-
-const options = [
-  { label: 'Transporter', value: 'transporter' },
-  { label: 'Shipper', value: 'shipper' },
-]
 
 // This is mostly cover what ticket #1 is all about
 function App() {
@@ -20,10 +14,10 @@ function App() {
           <Space direction='vertical'>
             <Typography.Title code>Kargo TMS</Typography.Title>
             <h2>Welcome to Kargo!</h2>
-            <Link to='/login/transporter'>
+            <Link to='/trasnsporter'>
               <button>Transporter</button>
             </Link>
-            <Link to='/login/shipper'>
+            <Link to='/shipper'>
               <button>Shipper</button>
             </Link>
           </Space>
