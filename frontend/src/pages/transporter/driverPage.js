@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "../../component/Table"
+import Table from "../../component/Table";
 
 class DriverPage extends React.Component{
     consructor(props){
@@ -30,7 +30,15 @@ class DriverPage extends React.Component{
         )
     }
 
-    
+    render(){
+        return (
+            <div class="container-fluid">
+                <h1>test</h1>
+            </div>
+        )
+    }
+
+
 
 
 }

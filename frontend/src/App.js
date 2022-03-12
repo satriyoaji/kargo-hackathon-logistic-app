@@ -2,6 +2,7 @@ import './App.scss';
 import 'antd/dist/antd.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from './pages/login';
+import DriverPage from './pages/transporter/driverPage'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
             path="/"
             element={<Navigate to="/login" />}
           />
-          <Route exact path="/login/driver" element={<DriverPage/>}></Route>
+          <Route path="/login/driver" element={<DriverPage/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
