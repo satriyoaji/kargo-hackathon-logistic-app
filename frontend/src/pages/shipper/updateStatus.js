@@ -2,8 +2,6 @@ import _default from 'antd/lib/time-picker'
 import React, { useState, useEffect } from 'react'
 
 const UpdateStatus = ({ id, getShowStatus }) => {
-  const [newStatus, setNewStatus] = useState('')
-
   const handleCancel = (event) => {
     event.preventDefault()
     getShowStatus(false)
@@ -11,6 +9,7 @@ const UpdateStatus = ({ id, getShowStatus }) => {
 
   const handleUpdate = (event) => {
     event.preventDefault()
+    console.log(event.target)
     // api call
     getShowStatus(false)
   }
