@@ -8,7 +8,7 @@ const AllocateShipment = ({ id, getShowAllocateShipment }) => {
 
   const handleAllocate = (event) => {
     event.preventDefault()
-    // api
+    // api call
     getShowAllocateShipment(false)
   }
   return (

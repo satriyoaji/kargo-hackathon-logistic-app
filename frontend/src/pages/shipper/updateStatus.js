@@ -3,10 +3,18 @@ import React, { useState, useEffect } from 'react'
 
 const UpdateStatus = ({ id, getShowStatus }) => {
   const [newStatus, setNewStatus] = useState('')
+
   const handleCancel = (event) => {
     event.preventDefault()
     getShowStatus(false)
   }
+
+  const handleUpdate = (event) => {
+    event.preventDefault()
+    // api call
+    getShowStatus(false)
+  }
+
   return (
     <div className='modalForm'>
       <h3>Update Status: {id}</h3>
@@ -20,7 +28,9 @@ const UpdateStatus = ({ id, getShowStatus }) => {
           <option>Completed</option>
         </select>
       </div>
-      <button className='modalButton'>Update</button>
+      <button className='modalButton' onClick={handleUpdate}>
+        Update
+      </button>
       <button className='modalButton' onClick={handleCancel}>
         Cancel
       </button>

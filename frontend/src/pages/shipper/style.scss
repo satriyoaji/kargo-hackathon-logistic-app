@@ -61,10 +61,15 @@ input {
   border-width: 1px;
   border-style: solid;
   border-color: black;
-  width: 40rem;
-  padding: 4rem;
+  background-color: white;
+  width: 80rem;
+  height: 40rem;
+  padding: 5rem;
   margin-bottom: 3rem;
   margin-top: 3rem;
+  position: absolute;
+  left: 0px;
+  top: -20px;
 }
 
 .body {
