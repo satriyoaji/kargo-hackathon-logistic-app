@@ -20,10 +20,11 @@ func FetchAllTransporters(c echo.Context) error {
 
 func StoreTransporter(c echo.Context) error {
 	licenseNumber := c.FormValue("license_number")
-	address := c.FormValue("address")
-	phone := c.FormValue("phone")
+	licenseType := c.FormValue("license_type")
+	truckType := c.FormValue("truck_type")
+	productionYear := c.FormValue("production_year")
 
-	result, err := models.StoreTransporter(licenseNumber, address, phone)
+	result, err := models.StoreTransporter(licenseNumber, licenseType, truckType, productionYear)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{
 			"message": err.Error(),
