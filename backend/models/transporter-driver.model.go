@@ -7,7 +7,7 @@ import (
 )
 
 type Driver struct {
-	Id        int       `json:"id"`
+	Id        int       `json:"id" gorm:"primaryKey"`
 	Name      string    `json:"name" validate:"required" gorm:"not null"`
 	Phone     string    `json:"phone" validate:"required" gorm:"not null"`
 	IdCard    string    `json:"id_card" validate:""`
