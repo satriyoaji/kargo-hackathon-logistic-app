@@ -1,9 +1,19 @@
 import React, { useState } from 'react'
 
-const AllocateShipment = () => {
+const AllocateShipment = ({ id, getShowAllocateShipment }) => {
+  const handleCancel = (event) => {
+    event.preventDefault()
+    getShowAllocateShipment(false)
+  }
+
+  const handleAllocate = (event) => {
+    event.preventDefault()
+    // api
+    getShowAllocateShipment(false)
+  }
   return (
     <div className='modalForm '>
-      <h3>Allocate Shipments: </h3>
+      <h3>Allocate Shipments: {id}</h3>
       <div>
         <label>Truck: </label>
         <select></select>
@@ -12,8 +22,12 @@ const AllocateShipment = () => {
         <label>Driver: </label>
         <select></select>
       </div>
-      <button className='modalButton'>Allocate </button>
-      <button className='modalButton'>Cancel</button>
+      <button onClick={handleAllocate} className='modalButton'>
+        Allocate{' '}
+      </button>
+      <button onClick={handleCancel} className='modalButton'>
+        Cancel
+      </button>
     </div>
   )
 }

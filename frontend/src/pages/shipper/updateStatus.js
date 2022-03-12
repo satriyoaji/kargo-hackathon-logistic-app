@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import _default from 'antd/lib/time-picker'
+import React, { useState, useEffect } from 'react'
 
-const UpdateStatus = () => {
+const UpdateStatus = ({ id, getShowStatus }) => {
+  const [newStatus, setNewStatus] = useState('')
+  const handleCancel = (event) => {
+    event.preventDefault()
+    getShowStatus(false)
+  }
   return (
-    <div className='modalForm '>
-      <h3>Update Status: </h3>
+    <div className='modalForm'>
+      <h3>Update Status: {id}</h3>
       <div>
         <label>Status: </label>
         <select>
@@ -15,7 +21,9 @@ const UpdateStatus = () => {
         </select>
       </div>
       <button className='modalButton'>Update</button>
-      <button className='modalButton'>Cancel</button>
+      <button className='modalButton' onClick={handleCancel}>
+        Cancel
+      </button>
     </div>
   )
 }

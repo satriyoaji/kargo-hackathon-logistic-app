@@ -9,19 +9,39 @@ import './style.scss'
 const Shipper = () => {
   const [shipments, setShipments] = useState(data)
   const [showModal, setShowModal] = useState(false)
+  const [selectedShipment, setSelectedShipment] = useState('')
+
+  // status fields
+  const [showStatus, setShowStatus] = useState(false)
 
   // allocate fields
   const [showAllocate, setShowAllocate] = useState(false)
 
-  // status fields
-
   const getShowModalStatus = () => {
-    setShowModal(!setShowModal)
+    setShowModal(!showModal)
   }
 
   const getNewShipment = (newShipment) => {
     setShipments([...shipments, newShipment])
-    setShowModal(!setShowModal)
+    setShowModal(!showModal)
+  }
+
+  const getShowAllocateShipment = () => {
+    setShowAllocate(!showAllocate)
+  }
+
+  const getShowStatus = () => {
+    setShowStatus(!showStatus)
+  }
+
+  const handleUpdateClick = (shipment) => {
+    setSelectedShipment(shipment.shipment)
+    setShowStatus(true)
+  }
+
+  const handleAllocateClick = (shipment) => {
+    setSelectedShipment(shipment.shipment)
+    setShowAllocate(true)
   }
 
   return (
@@ -62,15 +82,26 @@ const Shipper = () => {
               <td>{shipment.loadingdate}</td>
               <td>{shipment.status}</td>
               <td>
-                <button>Allocate Shipment</button>
-                <button>Update Status</button>
+                <button onClick={() => handleUpdateClick(shipment)}>
+                  Update Status
+                </button>
+                <button onClick={() => handleAllocateClick(shipment)}>
+                  Allocate Shipment
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <UpdateStatus />
-      <AllocateShipment />
+      {showStatus && (
+        <UpdateStatus id={selectedShipment} getShowStatus={getShowStatus} />
+      )}
+      {showAllocate && (
+        <AllocateShipment
+          id={selectedShipment}
+          getShowAllocateShipment={getShowAllocateShipment}
+        />
+      )}
     </div>
   )
 }
