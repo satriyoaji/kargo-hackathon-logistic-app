@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './driver.css';
+import AddDriverModal from "./addDriver";
+import { Link } from "react-router-dom";
 
 class DriverPage extends React.Component{
     constructor(props){
@@ -9,6 +11,9 @@ class DriverPage extends React.Component{
             usingSearch: false,
             list_items:3,
             keySearch:null,
+            showModalAdd:false, 
+            showModalUpdate:false,
+            newDriver:null,
             items: [
                 {
                     driverName: "Jack",
@@ -32,6 +37,19 @@ class DriverPage extends React.Component{
             filterResult: []
         }
     }
+    
+    // changeShowModalAdd = () => {
+    //     this.state.showModalAdd = !this.state.showModalAdd;
+    // }
+
+    // changeShowModalUpdate = () => {
+    //     this.state.showModalUpdate = !this.state.showModalUpdate;
+    // }
+
+    // getNewDriver = (driver) => {
+    //     this.state.showModalAdd = !(this.state.showModalAdd);
+    //     this.state.newDriver = driver;
+    // }
 
     handleFilter = (val) => {
         if(val != ''){
@@ -44,11 +62,10 @@ class DriverPage extends React.Component{
         else{
             this.setState({keySearch: null, usingSearch:false})
         }
-        
     }
     
     render(){
-        const {items, list_items, keySearch, usingSearch, filterResult} = this.state;
+        const {items, list_items, keySearch, usingSearch, filterResult, showModalAdd} = this.state;
         return (
             <div class="container">
             <div class="container-fluid box" style={{marginTop: "50px"}}>
@@ -59,7 +76,7 @@ class DriverPage extends React.Component{
                                 <input value={keySearch} onChange={(e)=> this.handleFilter(e.target.value)} placeholder="Search..."></input>
                             </div>
                             <div class="col-5">
-                                <button>Add Driver</button>
+                                <Link to="/login/driver/add" class="button">Add Driver</Link>
                             </div>
                         </div>
                     </div>

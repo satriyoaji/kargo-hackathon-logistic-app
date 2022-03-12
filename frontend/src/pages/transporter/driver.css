@@ -24,7 +24,7 @@ input{
     border-radius: 3pt;
 }
 
-button{
+.button{
     background-color: darkslateblue;
     color: white;
     border: none;

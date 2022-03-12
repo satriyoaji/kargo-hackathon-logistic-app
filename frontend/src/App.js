@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from './pages/login';
 import DriverPage from './pages/transporter/driverPage';
+import AddDriverPage from './pages/transporter/addDriver';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             element={<Navigate to="/login" />}
           />
           <Route path="/login/driver" element={<DriverPage/>}></Route>
+          <Route path="/login/driver/add" element={<AddDriverPage/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
