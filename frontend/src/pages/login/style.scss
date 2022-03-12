@@ -1,6 +1,17 @@
 .login {
   background-color: #282c34;
 
+  h2 {
+    color: white;
+  }
+
+  button {
+    width: 8rem;
+    height: 2rem;
+    font-weight: bold;
+    color: black;
+  }
+
   &-header {
     align-items: center;
     color: white;
