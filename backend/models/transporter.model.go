@@ -17,31 +17,15 @@ type Transporter struct {
 }
 
 func FetchAllTransporters() (Response, error) {
-	var obj Transporter
-	var arrayObj []Transporter
 	var res Response
 
-	con := database.GetConnection()
+	transporters := []Transporter{}
 
-	sqlStatement := "SELECT * FROM transporters"
-
-	rows, err := con.Query(sqlStatement)
-	defer rows.Close()
-
-	helpers.OutputPanicError(err)
-
-	for rows.Next() {
-		err = rows.Scan(&obj.Id, &obj.LicenseNumber, &obj.LicenseType, &obj.TruckType, &obj.ProductionYear, &obj.TruckType)
-		if err != nil {
-			return res, err
-		}
-
-		arrayObj = append(arrayObj, obj)
-	}
+	database.DB.Find(&transporters)
 
 	res.Status = http.StatusOK
 	res.Message = "Success"
-	res.Data = arrayObj
+	res.Data = transporters
 
 	return res, nil
 }
