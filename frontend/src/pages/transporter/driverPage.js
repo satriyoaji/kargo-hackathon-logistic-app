@@ -8,7 +8,7 @@ class DriverPage extends React.Component{
         this.state = {
             usingSearch: false,
             list_items:3,
-            keySearch:'Search keywords...',
+            keySearch:null,
             items: [
                 {
                     driverName: "Jack",
@@ -29,26 +29,37 @@ class DriverPage extends React.Component{
                     status: "Active"
                 }
             ],
+            filterResult: []
         }
     }
 
-    handleFilter = (event) => {
-        this.setState({keySearch: event.target.value});
+    handleFilter = (val) => {
+        if(val != ''){
+            this.setState({keySearch: val, usingSearch:true});
+            const filteredData = this.state.items.filter(item => {
+                return item.driverName.toLowerCase().startsWith(val.toLowerCase());
+            })
+            this.setState({filterResult: filteredData});
+        }
+        else{
+            this.setState({keySearch: null, usingSearch:false})
+        }
+        
     }
     
     render(){
-        const {items, list_items, keySearch} = this.state;
-        const lowerCasedFilter = keySearch.toLowerCase();
-        const filteredData = items.filter(item => {
-            return item.driverName.toLowerCase().startsWith(lowerCasedFilter)
-        })
+        const {items, list_items, keySearch, usingSearch, filterResult} = this.state;
         return (
-            <div class="container-fluid" style={{marginTop: "50px"}}>
-                <div class="d-flex justify-content-between">
+            <div class="container">
+            <div class="container-fluid box" style={{marginTop: "50px"}}>
+                <div class="d-flex justify-content-between top-content" str>
                     <div class="col-md-6 mb-4">
                         <div class="row">
                             <div class="col-5">
-                                <input value={keySearch} onChange={this.handleFilter}></input>
+                                <input value={keySearch} onChange={(e)=> this.handleFilter(e.target.value)} placeholder="Search..."></input>
+                            </div>
+                            <div class="col-5">
+                                <button>Add Driver</button>
                             </div>
                         </div>
                     </div>
@@ -59,7 +70,7 @@ class DriverPage extends React.Component{
                     </div>
                 }
                 {list_items != null &&
-                    <div class="container-fluid tab-content">
+                    <div class="tab-content">
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
@@ -70,24 +81,37 @@ class DriverPage extends React.Component{
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {items.map(item => (
-                                    <tr>
-                                        <td scope="row">{item.driverName}</td>
-                                        <td>{item.phoneNumber}</td>
-                                        <td>{item.createdAt}</td>
-                                        <td>{item.status}</td>
-                                        <td><button>Update</button></td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                            
+                            {!usingSearch && 
+                                <tbody>
+                                    {items.map(item => (
+                                        <tr>
+                                            <td scope="row">{item.driverName}</td>
+                                            <td>{item.phoneNumber}</td>
+                                            <td>{item.createdAt}</td>
+                                            <td>{item.status}</td>
+                                            <td><button>Update</button></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            }
+                            {usingSearch  && 
+                                <tbody>
+                                    {filterResult.map(item => (
+                                        <tr>
+                                            <td scope="row">{item.driverName}</td>
+                                            <td>{item.phoneNumber}</td>
+                                            <td>{item.createdAt}</td>
+                                            <td>{item.status}</td>
+                                            <td><button>Update</button></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            }
                         </table>
                     </div>
                 }
-                
             </div>
-
+            </div>
         )
     }
 }
