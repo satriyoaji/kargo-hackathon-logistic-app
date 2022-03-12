@@ -1,34 +1,25 @@
 import {Modal, Button, Form} from "react-bootstrap"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const ModalEditTrucks =(props)=>{
+const ModalCreateTrucks =(props)=>{
+  const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-  const [truck, setTruck] = useState({});
-  const [licenseNumber, setLicenseNumber] = useState("");
-  const [prodYear, setProdYear] = useState("");
-  const urlPutTruck= "/api/transporter/store-truck/"
-  const urlGetTruck= "/api/transporter/get-truck/"
-
-  useEffect(()=>{
-    axios.get(urlGetTruck)
-    .then((data)=>{
-      console.log(data);
-      setTruck(data);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-    .finally(()=>{
-    })
-},[])
-
-  const updateErr = (value) => {
-    console.log(!!errors.value, value);
-    setErrors({
-      ...errors,
-      [value]: null,
+  const [plateType, setPlateType] = useState ("")
+  const [truckType, setTruckType] = useState ("")
+  const { licenseNumber, prodYear } = form;
+  const urlPostTruck= "/api/transporter/store-truck";
+  const setField = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value,
     });
+    // Check and see if errors exist, and remove them from the error object:
+    if (!!errors[field])
+      setErrors({
+        ...errors,
+        [field]: null,
+      });
   };
 
   const findFormErrors = () => {
@@ -39,13 +30,20 @@ const ModalEditTrucks =(props)=>{
     return newErrors;
   }
 
-  const handleUpdateTruck=(e)=>{
+  const handleCreateTruck=(e)=>{
     e.preventDefault();
     const newErrors = findFormErrors();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      axios.put(urlPutTruck+props.id)
+      const body = {
+        license_number : licenseNumber,
+        truck_type : truckType,
+        plate_type : plateType,
+        production_year : prodYear
+      }
+      console.log(body);
+      axios.delete(urlPostTruck, body)
       .then(()=>{      
       })
       .catch((err)=>{
@@ -67,23 +65,19 @@ const ModalEditTrucks =(props)=>{
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-           Edit Unit
+          Add New Unit
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <Form>
+        <Form>
           {/* license Number */}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>License Number</Form.Label>
             <Form.Control 
                 type="text" 
                 autoComplete="off"
-                placeholder="Enter license number"
-                value={truck.license_number}
-                onChange={(e) => {
-                  setLicenseNumber(e.target.value);
-                  updateErr("licenseNumber");
-                }}
+                placeholder="Enter license number" 
+                onChange={(e) => setField("licenseNumber", e.target.value)}
                 required
                 isInvalid={!!errors.licenseNumber}
                 />
@@ -94,14 +88,14 @@ const ModalEditTrucks =(props)=>{
           {/* License Type */}
           <Form.Group className="mb-3">
             <Form.Label>License Type</Form.Label>
-            <Form.Select id="licenseType" value={truck.plate_type}>
+            <Form.Select id="licenseType" onChange={(e) => setPlateType(e.target.value)}>
               <option value="Black">Black</option>
               <option value="Yellow">Yellow</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Truck Type</Form.Label>
-            <Form.Select id="truckType"   value={truck.truck_type}>
+            <Form.Select id="truckType" onChange={(e) => setTruckType(e.target.value)}>
               <option value="Black">Tronton</option>
               <option value="Yellow">Container</option>
               <option value="Yellow">CDE</option>
@@ -113,11 +107,7 @@ const ModalEditTrucks =(props)=>{
                 type="text" 
                 placeholder="Enter production year"
                 autoComplete="off"
-                value={truck.production_year}
-                onChange={(e) => {
-                  setProdYear(e.target.value);
-                  updateErr("prodYear");
-                }}
+                onChange={(e) => setField("prodYear", e.target.value)}
                 required
                 isInvalid={!!errors.prodYear} />
             <Form.Control.Feedback type="invalid">
@@ -135,10 +125,10 @@ const ModalEditTrucks =(props)=>{
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={(e)=>handleUpdateTruck(e)}>Close</Button>
+        <Button onClick={(e)=>handleCreateTruck(e)}>Close</Button>
       </Modal.Footer>
     </Modal>
     </>
   )
 }
-export default ModalEditTrucks;
+export default ModalCreateTrucks;
