@@ -7,9 +7,9 @@ import (
 
 type Truck struct {
 	Id             int    `json:"id"`
-	LicenseNumber  string `json:"license_number" validate:"required"`
-	TruckType      string `json:"truck_type" validate:"required"`
-	PlateType      string `json:"plate_type" validate:"required"`
+	LicenseNumber  string `json:"license_number" validate:"required" gorm:"not null" gorm:"not null"`
+	TruckType      string `json:"truck_type" validate:"required" gorm:"not null"`
+	PlateType      string `json:"plate_type" validate:"required" gorm:"not null"`
 	ProductionYear string `json:"production_year" validate:""`
 	STNK           string `json:"stnk" validate:""`
 	KIR            string `json:"kir" validate:""`

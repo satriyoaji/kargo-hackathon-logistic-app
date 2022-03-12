@@ -19,6 +19,7 @@ func Connect() {
 
 	connection.AutoMigrate(
 		Truck{},
+		Driver{},
 		Shipment{},
 	)
 }
