@@ -14,10 +14,10 @@ func Init() *echo.Echo {
 		return context.String(http.StatusOK, "Hello world!")
 	})
 
-	e.GET("api/transporters", controllers.FetchAllTransporters)
-	e.POST("api/transporters", controllers.StoreTransporter)
-	e.PUT("api/transporters/:id", controllers.UpdateTransporter)
-	e.DELETE("api/transporters/:id", controllers.DeleteTransporter)
+	e.GET("api/transporter/get-all-trucks", controllers.FetchAllTrucks)
+	e.POST("api/transporter/store-truck", controllers.StoreTruck)
+	e.PUT("api/transporter/update-truck/:id", controllers.UpdateTruck)
+	e.DELETE("api/transporter/delete-truck/:id", controllers.DeleteTruck)
 
 	e.GET("api/shipment/get-all", controllers.FetchAllShipments)
 	e.POST("api/shipment/insert", controllers.AddShipment)
