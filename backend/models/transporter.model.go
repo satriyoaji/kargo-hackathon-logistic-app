@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/go-playground/validator/v10"
 	"net/http"
 )
 
@@ -27,8 +28,24 @@ func FetchAllTransporters() (Response, error) {
 	return res, nil
 }
 
-func StoreTransporter(licenseNumber, licenseType, truckType string) (Response, error) {
+func StoreTransporter(licenseNumber, licenseType, truckType, productionYear string) (Response, error) {
 	var res Response
+
+	v := validator.New()
+	transporterStruct := Transporter{
+		LicenseNumber:  licenseNumber,
+		LicenseType:    licenseType,
+		TruckType:      truckType,
+		ProductionYear: productionYear,
+		Status:         true,
+	}
+	// validation input
+	err := v.Struct(transporterStruct)
+	if err != nil {
+		return res, err
+	}
+
+	DB.Create(&transporterStruct)
 	return res, nil
 }
 
