@@ -6,10 +6,10 @@ import (
 )
 
 type Truck struct {
-	Id             int    `json:"id"`
-	LicenseNumber  string `json:"license_number" validate:"required"`
-	TruckType      string `json:"truck_type" validate:"required"`
-	PlateType      string `json:"plate_type" validate:"required"`
+	Id             int    `json:"id" gorm:"primaryKey"`
+	LicenseNumber  string `json:"license_number" validate:"required" gorm:"unique;not null" gorm:"not null"`
+	TruckType      string `json:"truck_type" validate:"required" gorm:"not null"`
+	PlateType      string `json:"plate_type" validate:"required" gorm:"not null"`
 	ProductionYear string `json:"production_year" validate:""`
 	STNK           string `json:"stnk" validate:""`
 	KIR            string `json:"kir" validate:""`
@@ -62,6 +62,13 @@ func StoreTruck(licenseNumber, truckType, plateType, productionYear string) (Res
 	// validation input
 	err := v.Struct(truckStruct)
 	if err != nil {
+		return res, err
+	}
+
+	//check if exist license number
+	if err := DB.Where("license_number = ?", licenseNumber).First(&truckStruct).Error; err == nil {
+		res.Status = http.StatusInternalServerError
+		res.Message = "the truck with given license number has existed"
 		return res, err
 	}
 

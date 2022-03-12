@@ -20,6 +20,12 @@ func Init() *echo.Echo {
 	e.PUT("api/transporter/update-truck/:id", controllers.UpdateTruck)
 	e.DELETE("api/transporter/delete-truck/:id", controllers.DeleteTruck)
 
+	e.GET("api/transporter/get-all-drivers", controllers.FetchAllDrivers)
+	e.GET("api/transporter/get-driver/:id", controllers.FetchByIdDriver)
+	e.POST("api/transporter/store-driver", controllers.StoreDriver)
+	e.PUT("api/transporter/update-driver/:id", controllers.UpdateDriver)
+	e.DELETE("api/transporter/delete-driver/:id", controllers.DeleteDriver)
+
 	e.GET("api/shipment/get-all", controllers.FetchAllShipments)
 	e.POST("api/shipment/insert", controllers.AddShipment)
 	e.PUT("api/shipment/update-status/:shipment_number", controllers.UpdateShipmentStatus)
