@@ -1,10 +1,10 @@
 package routes
 
 import (
-	"github.com/labstack/echo/v4"
 	"hackathon-basic-backend/controllers"
-	"hackathon-basic-backend/middlewares"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
 func Init() *echo.Echo {
@@ -14,13 +14,24 @@ func Init() *echo.Echo {
 		return context.String(http.StatusOK, "Hello world!")
 	})
 
-	e.GET("api/transporters", controllers.FetchAllTransporters, middlewares.IsAuthenticated)
-	e.POST("api/transporters", controllers.StoreTransporter, middlewares.IsAuthenticated)
-	e.PUT("api/transporters/:id", controllers.UpdateTransporter, middlewares.IsAuthenticated)
-	e.DELETE("api/transporters/:id", controllers.DeleteTransporter, middlewares.IsAuthenticated)
+	e.GET("api/transporter/get-all-trucks", controllers.FetchAllTrucks)
+	e.GET("api/transporter/get-truck/:id", controllers.FetchByIdTruck)
+	e.POST("api/transporter/store-truck", controllers.StoreTruck)
+	e.PUT("api/transporter/update-truck/:id", controllers.UpdateTruck)
+	e.DELETE("api/transporter/delete-truck/:id", controllers.DeleteTruck)
+
+	e.GET("api/transporter/get-all-drivers", controllers.FetchAllDrivers)
+	e.GET("api/transporter/get-driver/:id", controllers.FetchByIdDriver)
+	e.POST("api/transporter/store-driver", controllers.StoreDriver)
+	e.PUT("api/transporter/update-driver/:id", controllers.UpdateDriver)
+	e.DELETE("api/transporter/delete-driver/:id", controllers.DeleteDriver)
+
+	e.GET("api/shipment/get-all", controllers.FetchAllShipments)
+	e.POST("api/shipment/insert", controllers.AddShipment)
+	e.PUT("api/shipment/update-status/:shipment_number", controllers.UpdateShipmentStatus)
 
 	e.GET("api/generate-hash/:password", controllers.GenerateHashPassword)
-	e.POST("api/login", controllers.ActionLogin)
+	// e.POST("api/login", controllers.ActionLogin)
 
 	return e
 }

@@ -2,12 +2,12 @@ package main
 
 import (
 	"hackathon-basic-backend/config"
-	"hackathon-basic-backend/database"
+	"hackathon-basic-backend/models"
 	"hackathon-basic-backend/routes"
 )
 
 func main() {
-	database.Init()
+	models.Connect()
 
 	e := routes.Init()
 
