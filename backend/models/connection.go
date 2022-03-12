@@ -18,7 +18,7 @@ func Connect() {
 	DB = connection
 
 	connection.AutoMigrate(
-		Transporter{},
+		Truck{},
 		Shipment{},
 	)
 }
