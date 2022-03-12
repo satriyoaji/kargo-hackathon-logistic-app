@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // import { Driver } from "./driverModel";
 import './driver.css';
 
@@ -21,6 +22,7 @@ const AddDriverModal = ({getShowAddModal, getNewDriver}) =>{
             shipment: addForm.driverName,
             phoneNumber: addForm.phoneNumber
         }
+        //belom dikirim
     }
 
     return (
@@ -39,10 +41,10 @@ const AddDriverModal = ({getShowAddModal, getNewDriver}) =>{
                     </div>
                     <div class="row">
                         <div class="col-lg-8 col-sm-12">
-                            <button class="button" onClick={()=> getShowAddModal()}>Back</button>
+                            <Link to="/login/driver" class="button">Back</Link>
                         </div>
                         <div class="col-lg-8 col-sm-12">
-                            <button class="button" onClick={()=> getShowAddModal()}>Submit</button>
+                            <Link to="/login/driver" class="button">Submit</Link>
                         </div>
                     </div>
                 </form>

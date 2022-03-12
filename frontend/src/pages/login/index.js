@@ -1,34 +1,30 @@
-import { useCallback } from "react";
-import { Button, Select, Space, Typography } from 'antd';
-import './style.scss';
+import { Space, Typography } from 'antd'
 
-const options = [
-  { label: 'Transporter', value: 'transporter' },
-  { label: 'Shipper', value: 'shipper' },
-]
+// Routing imports
+import { Link } from 'react-router-dom'
+
+import './style.scss'
 
 // This is mostly cover what ticket #1 is all about
 function App() {
-  const handleLogin = useCallback(() => {
-    {/* YOUR CODE HERE */}
-  })
   return (
-    <div className="login">
-      <div className="login-header">
-        <div className="login-header-wrapper">
-          <Space direction="vertical">
+    <div className='login'>
+      <div className='login-header'>
+        <div className='login-header-wrapper'>
+          <Space direction='vertical'>
             <Typography.Title code>Kargo TMS</Typography.Title>
-            <div>
-              Log in as <Select placeholder="User" options={options} />
-            </div>
-            <div>
-              <Button onClick={handleLogin}type="primary">Login</Button>
-            </div>
+            <h2>Welcome to Kargo!</h2>
+            <Link to='/transporter/trucks'>
+              <button>Transporter</button>
+            </Link>
+            <Link to='/shipper'>
+              <button>Shipper</button>
+            </Link>
           </Space>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
