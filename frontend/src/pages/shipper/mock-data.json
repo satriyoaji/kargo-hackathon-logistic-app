@@ -1,0 +1,20 @@
+[
+  {
+    "shipment": 1,
+    "liscense": "b 123",
+    "name": "jen",
+    "origin": "jkt",
+    "dest": "sby",
+    "loadingdate": "3/11/2022",
+    "status": "Active"
+  },
+  {
+    "shipment": 2,
+    "liscense": "b 123",
+    "name": "den",
+    "origin": "sby",
+    "dest": "jkt",
+    "loadingdate": "3/11/2022",
+    "status": "Active"
+  }
+]
