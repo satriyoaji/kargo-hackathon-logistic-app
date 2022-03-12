@@ -1,10 +1,11 @@
 package routes
 
 import (
-	"github.com/labstack/echo/v4"
 	"hackathon-basic-backend/controllers"
 	"hackathon-basic-backend/middlewares"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
 func Init() *echo.Echo {
@@ -20,7 +21,7 @@ func Init() *echo.Echo {
 	e.DELETE("api/transporters/:id", controllers.DeleteTransporter, middlewares.IsAuthenticated)
 
 	e.GET("api/generate-hash/:password", controllers.GenerateHashPassword)
-	e.POST("api/login", controllers.ActionLogin)
+	// e.POST("api/login", controllers.ActionLogin)
 
 	return e
 }

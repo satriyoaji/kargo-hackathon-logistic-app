@@ -1,7 +1,6 @@
 package models
 
 import (
-	"hackathon-basic-backend/database"
 	"net/http"
 )
 
@@ -19,7 +18,7 @@ func FetchAllTransporters() (Response, error) {
 
 	transporters := []Transporter{}
 
-	database.DB.Find(&transporters)
+	DB.Find(&transporters)
 
 	res.Status = http.StatusOK
 	res.Message = "Success"
