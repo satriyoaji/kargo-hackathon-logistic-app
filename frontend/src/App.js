@@ -16,6 +16,7 @@ function App() {
             path="/"
             element={<Navigate to="/login" />}
           />
+          <Route exact path="/login/driver" element={<DriverPage/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
