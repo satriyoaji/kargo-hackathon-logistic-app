@@ -7,7 +7,7 @@ import (
 
 type Truck struct {
 	Id             int    `json:"id" gorm:"primaryKey"`
-	LicenseNumber  string `json:"license_number" validate:"required" gorm:"unique, not null" gorm:"not null"`
+	LicenseNumber  string `json:"license_number" validate:"required" gorm:"unique;not null" gorm:"not null"`
 	TruckType      string `json:"truck_type" validate:"required" gorm:"not null"`
 	PlateType      string `json:"plate_type" validate:"required" gorm:"not null"`
 	ProductionYear string `json:"production_year" validate:""`
