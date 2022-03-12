@@ -1,15 +1,9 @@
-import { useState, useCallback } from 'react'
-import { Button, Select, Space, Typography } from 'antd'
+import { Space, Typography } from 'antd'
 
 // Routing imports
 import { Link } from 'react-router-dom'
 
 import './style.scss'
-
-const options = [
-  { label: 'Transporter', value: 'transporter' },
-  { label: 'Shipper', value: 'shipper' },
-]
 
 // This is mostly cover what ticket #1 is all about
 function App() {

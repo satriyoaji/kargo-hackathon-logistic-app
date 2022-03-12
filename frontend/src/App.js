@@ -12,8 +12,8 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />}></Route>
           <Route exact path='/' element={<Navigate to='/login' />} />
-          <Route path='/login/transporter' element={<Transporter />}></Route>
-          <Route path='/login/shipper' element={<Shipper />}></Route>
+          <Route path='/transporter' element={<Transporter />}></Route>
+          <Route path='/shipper' element={<Shipper />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
