@@ -19,7 +19,8 @@ func Init() *echo.Echo {
 	e.PUT("api/transporters/:id", controllers.UpdateTransporter)
 	e.DELETE("api/transporters/:id", controllers.DeleteTransporter)
 
-	e.GET("api/shipment/get-all", controllers.FetchAllShipments, middlewares.IsAuthenticated)
+	e.GET("api/shipment/get-all", controllers.FetchAllShipments)
+	e.POST("api/shipment/insert", controllers.AddShipment)
 
 	e.GET("api/generate-hash/:password", controllers.GenerateHashPassword)
 	// e.POST("api/login", controllers.ActionLogin)

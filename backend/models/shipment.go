@@ -1,6 +1,10 @@
 package models
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/go-playground/validator/v10"
+)
 
 type Shipment struct {
 	ShipmentNumber string `json:"shipment_number"`
@@ -9,16 +13,8 @@ type Shipment struct {
 	Origin         string `json:"origin"`
 	Destination    string `json:"destination"`
 	LoadingDate    string `json:"loading_date"`
-	// Status         []ShipmentStatus `json:"status"`
-	// Action         []ShipmentAction `json:"action"`
-}
-
-type ShipmentStatus struct {
-	Status string `json:"status"`
-}
-
-type ShipmentAction struct {
-	Action string `json:"action"`
+	Status         string `json:"status"`
+	Action         string `json:"action"`
 }
 
 func FetchAllShipments() (Response, error) {
@@ -32,5 +28,29 @@ func FetchAllShipments() (Response, error) {
 	res.Message = "Success"
 	res.Data = shipments
 
+	return res, nil
+}
+
+func AddShipment(shipmentNumber, licenseNumber, driverName, origin, destination, loadingDate, status, action string) (Response, error) {
+	var res Response
+
+	v := validator.New()
+	shipmentStruct := Shipment{
+		ShipmentNumber: shipmentNumber,
+		LicenseNumber:  licenseNumber,
+		DriverName:     driverName,
+		Origin:         origin,
+		Destination:    destination,
+		LoadingDate:    loadingDate,
+		Status:         status,
+		Action:         action,
+	}
+	// validation input
+	err := v.Struct(shipmentStruct)
+	if err != nil {
+		return res, err
+	}
+
+	DB.Create(&shipmentStruct)
 	return res, nil
 }
