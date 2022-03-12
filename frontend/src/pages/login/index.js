@@ -14,10 +14,10 @@ function App() {
           <Space direction='vertical'>
             <Typography.Title code>Kargo TMS</Typography.Title>
             <h2>Welcome to Kargo!</h2>
-            <Link to='/login/transporter'>
+            <Link to='/trasnsporter'>
               <button>Transporter</button>
             </Link>
-            <Link to='/login/shipper'>
+            <Link to='/shipper'>
               <button>Shipper</button>
             </Link>
           </Space>
